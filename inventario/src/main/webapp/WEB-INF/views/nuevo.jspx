@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.0"
+	xmlns:spring="http://www.springframework.org/tags"
+	xmlns:c="http://java.sun.com/jsp/jstl/core">
+	<jsp:directive.page isELIgnored="false" />
+	<jsp:directive.page language="java"
+		contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1" />
+
+	<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>Insert title here</title>
+</head>
+<body>
+	<spring:url value="/insertar/" var="url_insertar"></spring:url>
+	
+	<spring:message code="ejemplo.guardar" var="textoGuardar"></spring:message>
+	<form action="${url_insertar}" method="post">
+		<c:if test="${msgError != null}">
+          Error! ${msgError}
+        </c:if>
+		<table>
+			<tr>
+				<td><spring:message code="contacto.nombre" /></td>
+				<td><input type="text" name="nombre" value="${contacto.nombre}"/></td>
+			</tr>
+			<tr>
+				<td><spring:message code="contacto.apellidoPaterno" /></td>
+				<td><input type="text" name="apellidoPaterno" value="${contacto.apellidoPaterno}"/></td>
+			</tr>
+			<tr>
+				<td><spring:message code="contacto.apellidoMaterno" /></td>
+				<td><input type="text" name="apellidoMaterno" value="${contacto.apellidoMaterno}"/></td>
+			</tr>
+			<tr>
+				<td><spring:message code="contacto.telefono" /></td>
+				<td><input type="text" name="telefono" value="${contacto.telefono}"/></td>
+			</tr>
+			<tr>
+				<td><spring:message code="contacto.descripcion" /></td>
+				<td><input type="text" name="descripcion" value="${contacto.descripcion}"/></td>
+			</tr>
+			<input type="hidden" name="id" value="${contacto.id}"/>
+		</table>
+		<input type="submit" value="${textoGuardar}" />
+	</form>
+</body>
+	</html>
+</jsp:root>

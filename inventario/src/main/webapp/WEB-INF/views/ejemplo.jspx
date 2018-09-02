@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:spring="http://www.springframework.org/tags"
+	xmlns:c="http://java.sun.com/jsp/jstl/core" version="2.0">
+	<html xmlns="http://www.w3.org/1999/xhtml">
+<jsp:directive.page isELIgnored="false" />
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+<title>Insert title here</title>
+</head>
+<body>
+	<spring:url value="/ejemplo/Ejemplo1" var="url"></spring:url>
+	<spring:url value="/cargar-actualizar/" var="url_actualizar"></spring:url>
+	<spring:url value="/cargar-nuevo" var="url_registrar"></spring:url>
+	<input type="button" onclick="valores('${url}');" />
+	<spring:message code="ejemplo.bienvenida"></spring:message>
+	<div id="caja"></div>
+	<table border="1">
+		<tr>
+			<th><spring:message code="ejemplo.id" /></th>
+			<th><spring:message code="ejemplo.ejemplo" /></th>
+		</tr>
+		<c:if test="${msgError != null}">
+  ${msgError}
+</c:if>
+		<c:forEach var="ejemplo" items="${ejemplos}">
+			<tr>
+				<td><a href="${url_actualizar}${ejemplo.id}">${ejemplo.id}</a></td>
+				<td>${ejemplo.ejemplo}</td>
+			</tr>
+		</c:forEach>
+	</table>
+	<a href="${url_registrar}">Nuevo</a>
+</body>
+	</html>
+</jsp:root>

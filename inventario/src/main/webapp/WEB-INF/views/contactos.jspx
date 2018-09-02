@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:spring="http://www.springframework.org/tags"
+	xmlns:form="http://www.springframework.org/tags/form"
+	xmlns:c="http://java.sun.com/jsp/jstl/core" version="2.0">
+	<jsp:directive.page contentType="text/html; charset=ISO-8859-1"
+		pageEncoding="ISO-8859-1" session="false" />
+	<jsp:output doctype-root-element="html"
+		doctype-public="-//W3C//DTD XHTML 1.0 Transitional//EN"
+		doctype-system="http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"
+		omit-xml-declaration="true" />
+	<html xmlns="http://www.w3.org/1999/xhtml">
+<jsp:directive.page isELIgnored="false" />
+<head>
+<title>Contactos</title>
+</head>
+<body>
+	<spring:url value="/nuevo/" var="url_nuevo"></spring:url>
+	<spring:url value="/modificar/" var="url_modificar"></spring:url>
+	<spring:url value="/borrar/" var="url_borrar"></spring:url>
+	<div id="caja"></div>
+
+	<table border="1">
+		<tr>
+			<th></th>
+			<th></th>
+			<th><spring:message code="contacto.id" /></th>
+			<th><spring:message code="contacto.nombre" /></th>
+			<th><spring:message code="contacto.apellidoPaterno" /></th>
+			<th><spring:message code="contacto.apellidoMaterno" /></th>
+			<th><spring:message code="contacto.telefono" /></th>
+			<th><spring:message code="contacto.fechaCreacion" /></th>
+			<th><spring:message code="contacto.descripcion" /></th>
+		</tr>
+		<c:if test="${msgError!=null}">
+			${msgError}
+		</c:if>
+		<c:forEach var="contacto" items="${contactos}">
+			<form id="formContacto${contacto.id}" action="${url_borrar}" method="POST">
+			<tr>
+				<td><spring:message code="tabla.editar" var="botonEditar"/>
+				<input type="button" value="${botonEditar}" onClick="location.href='${url_modificar}${contacto.id}';"/></td>
+				<td><spring:message code="tabla.borrar" var="botonBorrar"/> 
+				<input type="submit" value="${botonBorrar}" onClick="confirm('¿Deseas borrar este elemento?');" /></td>
+				<td>${contacto.id}</td>
+				<td>${contacto.nombre}</td>
+				<td>${contacto.apellidoPaterno}</td>
+				<td>${contacto.apellidoMaterno}</td>
+				<td>${contacto.telefono}</td>
+				<td>${contacto.fechaCreacion}</td>
+				<td>${contacto.descripcion}</td>
+			</tr>
+			<input type="hidden" name="id" value="${contacto.id}"/>
+			</form>
+		</c:forEach>
+	</table>
+
+	<a href="${url_nuevo}">Nuevo</a>
+</body>
+	</html>
+</jsp:root>
